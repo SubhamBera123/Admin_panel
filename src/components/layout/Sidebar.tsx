@@ -1,4 +1,5 @@
 import { NavLink, useLocation } from 'react-router-dom';
+import { useTheme } from '@/hooks/useTheme';
 import {
   LayoutDashboard,
   Package,
@@ -53,10 +54,12 @@ const menuItems = [
   },
 ];
 
+
 export function Sidebar() {
   const { state } = useSidebar();
   const location = useLocation();
   const collapsed = state === 'collapsed';
+  const { theme } = useTheme();
 
   const isActive = (path: string) => {
     if (path === '/') {
@@ -65,8 +68,12 @@ export function Sidebar() {
     return location.pathname.startsWith(path);
   };
 
+  // Set text color based on theme
+  const textColor = theme === 'dark' ? 'text-white' : 'text-black';
+  const sidebarBg = theme === 'dark' ? 'bg-sidebar-dark' : 'bg-sidebar-light';
+
   return (
-    <SidebarUI className={`glass-card border-r border-sidebar-border transition-all duration-300 ${collapsed ? 'w-16' : 'w-64'}`}>
+    <SidebarUI className={`glass-card border-r border-sidebar-border transition-all duration-300 ${collapsed ? 'w-16' : 'w-64'} ${sidebarBg}`}>
       <SidebarContent className="p-4">
         {/* Logo */}
         <div className="flex items-center gap-3 mb-8 px-2">
@@ -75,14 +82,14 @@ export function Sidebar() {
           </div>
           {!collapsed && (
             <div>
-              <h1 className="font-bold text-lg gradient-text">Admin Panel</h1>
-              <p className="text-xs text-muted-foreground">E-commerce</p>
+              <h1 className={`font-bold text-lg gradient-text ${textColor}`}>Admin Panel</h1>
+              <p className={`text-xs text-muted-foreground ${textColor}`}>E-commerce</p>
             </div>
           )}
         </div>
 
         <SidebarGroup>
-          <SidebarGroupLabel className={collapsed ? 'sr-only' : ''}>
+          <SidebarGroupLabel className={collapsed ? 'sr-only' : textColor}>
             Navigation
           </SidebarGroupLabel>
           <SidebarGroupContent>
@@ -95,13 +102,13 @@ export function Sidebar() {
                       className={({ isActive: navIsActive }) =>
                         `flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-200 hover-scale ${
                           isActive(item.url)
-                            ? 'bg-gradient-primary text-white shadow-lg hover-glow'
-                            : 'hover:bg-sidebar-accent text-sidebar-foreground'
+                            ? `bg-gradient-primary text-white shadow-lg hover-glow`
+                            : `hover:bg-sidebar-accent ${textColor}`
                         } ${collapsed ? 'justify-center' : ''}`
                       }
                     >
-                      <item.icon className={`w-5 h-5 ${collapsed ? '' : 'mr-1'}`} />
-                      {!collapsed && <span className="font-medium">{item.title}</span>}
+                      <item.icon className={`w-5 h-5 ${collapsed ? '' : 'mr-1'} ${textColor}`} />
+                      {!collapsed && <span className={`font-medium ${textColor}`}>{item.title}</span>}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
