@@ -1,5 +1,11 @@
 
 # E-commerce Admin Panel
+## URL
+
+Live website url :- http://admin-panel159.netlify.app
+
+Repo url :-https://github.com/SubhamBera123/Admin_panel
+
 
 ## Project Purpose
 This project is a full-featured e-commerce admin panel designed to manage products, orders, customers, and analytics for an online store. It provides a modern, responsive UI and comprehensive CRUD operations for efficient business management.
@@ -105,37 +111,6 @@ The application comes with comprehensive sample data including:
 - **Customers**: Customer profiles with purchase history
 - **Analytics**: Revenue and order trend data
 
-### Mock API
-All data operations use a mock API layer (`src/api/mockApi.js`) that:
-- **Simulates network latency** (200-500ms) for realistic testing
-- **Persists data** to localStorage automatically
-- **Provides async functions** for all CRUD operations
-- **Ready for real API integration** - just replace the mock functions
-
-### Data Operations
-```javascript
-// Example API usage
-import { getProducts, addProduct, updateProduct } from '@/api/mockApi';
-
-// Fetch products with filters
-const products = await getProducts({ 
-  search: 'wireless', 
-  category: 'Electronics' 
-});
-
-// Add new product
-const newProduct = await addProduct({
-  name: 'New Product',
-  price: 99.99,
-  stock: 50
-});
-```
-
-### Reset/Seed Data
-- Use the **Settings > Data Management** panel to reset data
-- Or call `resetData()` from the API module
-- Sample data automatically seeds on first load
-
 ## 🛠️ Tech Stack
 
 ### Frontend Framework
@@ -159,32 +134,6 @@ const newProduct = await addProduct({
 - **localStorage** for data persistence
 - **Mock API layer** for development
 
-## 📁 Project Structure
-
-```
-src/
-├── api/
-│   └── mockApi.js           # Mock API with localStorage persistence
-├── components/
-│   ├── layout/
-│   │   ├── AdminLayout.tsx  # Main layout wrapper
-│   │   ├── Sidebar.tsx      # Navigation sidebar
-│   │   └── TopNavbar.tsx    # Top navigation bar
-│   └── ui/                  # Reusable UI components (shadcn)
-├── data/
-│   └── data.json           # Sample data for seeding
-├── hooks/
-│   ├── use-toast.ts        # Toast notifications hook
-│   └── useTheme.tsx        # Theme management hook
-├── pages/
-│   ├── Dashboard.tsx       # Main dashboard with KPIs and charts
-│   ├── Products.tsx        # Product management page
-│   ├── Orders.tsx          # Order management page
-│   ├── Customers.tsx       # Customer management page
-│   ├── Analytics.tsx       # Advanced analytics and reporting
-│   └── Settings.tsx        # Application settings
-└── index.css              # Design system and global styles
-```
 
 ## 🎯 Key Features Implementation
 
@@ -208,30 +157,6 @@ src/
 - **Grid/List view toggles** for different screen sizes
 - **Touch-friendly interactions** for mobile devices
 
-## 🔧 Customization
-
-### Theme Customization
-- Edit `src/index.css` for color scheme changes
-- Modify `tailwind.config.ts` for design tokens
-- Use CSS variables for consistent theming
-
-### Adding New Features
-- Extend the mock API in `src/api/mockApi.js`
-- Add new pages in `src/pages/`
-- Update routing in `src/App.tsx`
-
-### Real API Integration
-Replace mock API functions with real HTTP calls:
-```javascript
-// Replace in mockApi.js
-export const getProducts = async (filters) => {
-  const response = await fetch('/api/products', {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json' }
-  });
-  return response.json();
-};
-```
 
 ## 📈 Performance & Best Practices
 
@@ -249,22 +174,4 @@ npm run build
 ```
 
 ### Deploy to Static Hosting
-- **Vercel**: Connect your GitHub repository
 - **Netlify**: Drag and drop the `dist` folder
-- **GitHub Pages**: Use the built-in Actions workflow
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-Built with ❤️ using React, TypeScript, and modern web technologies.
